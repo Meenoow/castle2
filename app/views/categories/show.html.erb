@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Category #<%= @the_category.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/categories">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_category/<%= @the_category.id %>">
+          Delete category
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_category.description %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_category.user_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_category.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_category.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit category
+    </h2>
+
+    <form action="/modify_category/<%= @the_category.id %>"  method="post" >
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description" value="<%= @the_category.description %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_category.user_id %>">
+      </div>
+
+      <button>
+        Update category
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
