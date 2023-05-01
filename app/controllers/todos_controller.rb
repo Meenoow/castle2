@@ -4,7 +4,7 @@ class TodosController < ApplicationController
 
     @list_of_todos = matching_todos.order({ :created_at => :desc })
 
-    render({ :template => "todos/index.html.erb" })
+    render({ :template => "teacher_todos/index.html.erb" })
   end
 
   def show

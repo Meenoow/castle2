@@ -29,10 +29,15 @@
 </head>
 
 <body>
-  <%= render "shared/navbar" %>
+   <%if session.fetch(:user_id) == nil%>
+      <a href="/">Dashboard</a>
+      <a href="/user_sign_up">Sign up</a>
+  <%else%>
+   <%= render "shared/navbar" %>
 
   <div class="container">
     <%= render "shared/flashes" %>
+  <%end%>
 
     <%= yield %>
   </div>

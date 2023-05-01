@@ -1,0 +1,21 @@
+<h1>Welcome to CASTLE</h1>
+
+<h2>Pick your role</h2>
+
+<button>
+  <a href="/user_sign_in?role=teacher">I AM A TEACHER </a> 
+</button>
+
+<button>
+  <a href="/user_sign_in?role=student">I AM A STUDENTS</a>
+</button>
+
+<form action="/user_sign_in">
+  <input type="hidden" name="role" value="teacher">
+  <button>I AM A TEACHER</button>
+</form>
+
+<form action="/user_sign_in">
+  <input type="hidden" name="role" value="student">
+  <button>I AM A STUDENT</button>
+</form>

@@ -14,18 +14,37 @@
       Add a new todo
     </h2>
 
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" label for="category_id_box">
+    Subject
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Math</a></li>
+      <li><a class="dropdown-item" href="#">Reading</a></li>
+      <li><a class="dropdown-item" href="#">Writing</a></li>
+    </ul>
+  </div>
+
     <form action="/insert_todo" method="post">
       <div>
         <label for="content_box">
-          Content
+          Describe task
         </label>
-
         <input type="text" id="content_box" name="query_content">
       </div>
 
       <div>
         <label for="status_box">
-          Status
+          <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" label for="category_id_box">
+    Status
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">New</a></li>
+      <li><a class="dropdown-item" href="#">In Progress</a></li>
+      <li><a class="dropdown-item" href="#">Completed</a></li>
+    </ul>
+  </div>
         </label>
 
         <input type="text" id="status_box" name="query_status">

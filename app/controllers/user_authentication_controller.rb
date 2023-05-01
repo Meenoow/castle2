@@ -1,14 +1,21 @@
 class UserAuthenticationController < ApplicationController
   # Uncomment line 3 in this file and line 5 in ApplicationController if you want to force users to sign in before any other actions.
   # skip_before_action(:force_user_sign_in, { :only => [:sign_up_form, :create, :sign_in_form, :create_cookie] })
+  def user_indentification_form
+    render({ :template => "user_authentication/dashboard.html.erb" })
+  end
 
   def sign_in_form
+    @role = params.fetch("role", "student")
     render({ :template => "user_authentication/sign_in.html.erb" })
   end
 
   def create_cookie
-    user = User.where({ :email => params.fetch("query_email") }).first
-    
+    email = params.fetch("query_email", nil)
+    username = params.fetch("query_username", nil)
+    user = User.where({ :email => email }).first if email.present?
+    user = User.where({ :username => username }).first if username.present?
+
     the_supplied_password = params.fetch("query_password")
     
     if user != nil
@@ -25,6 +32,28 @@ class UserAuthenticationController < ApplicationController
       redirect_to("/user_sign_in", { :alert => "No user with that email address." })
     end
   end
+
+=begin  
+def create_cookie
+    user = User.where({ :username => params.fetch("query_username") }).first
+
+    the_supplied_password = params.fetch("query_password")
+    
+    if user != nil
+      are_they_legit = user.authenticate(the_supplied_password)
+    
+      if are_they_legit == false
+        redirect_to("/user_sign_in", { :alert => "Incorrect password." })
+      else
+        session[:user_id] = user.id
+      
+        redirect_to("/todos", { :notice => "Signed in successfully." })
+      end
+    else
+      redirect_to("/user_sign_in", { :alert => "No user with that email address." })
+    end
+  end
+=end
 
   def destroy_cookies
     reset_session
