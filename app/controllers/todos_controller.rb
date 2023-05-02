@@ -2,6 +2,7 @@ class TodosController < ApplicationController
   before_action(:force_user_sign_in)
 
   def index
+    require "date"
     matching_todos = @current_user.todos
 
     @list_of_todos = matching_todos.order({ :created_at => :desc })

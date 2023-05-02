@@ -24,7 +24,8 @@
   <%= render "form" %>
 
   <div class="next_up">
-    <h2>Date</h2>
+  <h2><%=Time.now.strftime("%a %e, %R %p") %></h2>
+    <!--<h2><%= Date.today %></h2>-->
       <ul>
         <% @list_of_todos.each do |todo| %>
         <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
