@@ -1,4 +1,69 @@
+<h1><%= @username %> todo list</h1>
 
+<div class="in_progress">
+
+  <h4>Complete your tasks before the end of the day</h4>
+  <ul>
+    <% @list_of_todos.each do |todo| %>
+      <% if todo.status == "next_up" %>
+        <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago </li>
+
+        <form action="/modify_todo/<%= todo.id %>" method="post">
+          <input type="hidden" name="query_status" value="done">
+          <button>Move to Done</button>
+        </form>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+  <h2>
+    Add new goal
+  </h2>
+
+  <%= render "form" %>
+
+  <div class="next_up">
+    <h2>Date</h2>
+      <ul>
+        <% @list_of_todos.each do |todo| %>
+        <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
+      </ul>
+       <form action="/modify_todo/<%= todo.id %>" method="post">
+          <input type="hidden" name="query_status" value="next_up">
+          <button>Move to In Progress</button>
+        </form>
+        <% end %>
+</div>
+
+<div class="done">
+<!-- make the done items gray out, move to the bottom, or cross out -->
+  <h2>Achievements</h2>
+  
+  <ul>
+    <% @list_of_todos.each do |todo| %>
+      <% if todo.status == "done" %>
+      <% time = Time.now %>
+        <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a> <p>Completed at <%= todo.updated_at.strftime("%l:%M%P on %d-%b-%Y") %> ago</p></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<!-- button and password box show up ONLY when all tasks are completed --> 
+
+<form action="/unlock" method="post">
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password">
+  <input type="submit" value="Unlock">
+  <% if session[:unlocked] %>
+    <button>Play!</button>
+  <% else %>
+    <p>password required</p>
+  <% end %>
+</form>
+
+<!--
 <div>
   <div>
     <h1>
@@ -36,7 +101,7 @@
         </select>
       </div>
 
-      <div>
+     <div>
         <label for="user_name_box">Assign to:</label> 
         <select id="user_name_box" name="query_user_id">
           <% options = ["Whole class", "student 1", "student 2", "student 3"] %>
@@ -45,6 +110,7 @@
           <% end %>
         </select>
       </div>
+   
 
       <form action="/insert_todo" method="post">
         <div>
@@ -53,11 +119,11 @@
         </div>
       </form>
 
-      <!--<div>
+    <div>
             <label for="category_id_box">Category</label>
             <input type="text" id="category_id_box" name="query_category_id">
           </div>
-        -->
+        
 
       <button>
         Create todo
@@ -70,6 +136,7 @@
 <div>
   <div>
     <table border="1">
+    
       <tr>
         <th>
           ID
@@ -144,3 +211,4 @@
 </div>
 
 <hr>
+-->

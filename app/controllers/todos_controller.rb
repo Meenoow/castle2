@@ -1,19 +1,49 @@
 class TodosController < ApplicationController
+  before_action(:force_user_sign_in)
+
   def index
-    matching_todos = Todo.all
+    matching_todos = @current_user.todos
 
     @list_of_todos = matching_todos.order({ :created_at => :desc })
 
-    render({ :template => "teacher_todos/index.html.erb" })
+    render({ :template => "todos/index.html.erb" })
   end
 
-  def stu_index
-    matching_todos = Todo.all
+  def create
+    @the_todo = Todo.new
+    @the_todo.content = params.fetch("query_content")
+    @the_todo.user_id = session.fetch(:user_id)
+    @the_todo.category_id = params.fetch("category_id")
 
-    @list_of_todos = matching_todos.order({ :created_at => :desc })
-
-    render({ :template => "student_todos/stu_index.html.erb" })
+    if @the_todo.save
+      redirect_to("/todos", :notice => "We saved a todo 🎉")
+    else
+      redirect_to("/todos", :alert => "Error saving todo: #{@the_todo.errors.full_messages.to_sentence}")
+    end
   end
+
+  def show
+    the_id = params.fetch("path_id")
+    @the_todo = Todo.where({:id => the_id})
+    render({ :template => "/todos" })
+  end
+
+  def update
+    @todo = Todo.find(params[:path_id])
+    current_stat = params.fetch("query_status")
+    @todo.status=current_stat
+    @todo.save
+    redirect_to("/")
+  end
+
+  def destroy
+    the_id = params.fetch("path_id")
+    the_todo = Todo.where({id: the_id}).at(0)
+    the_todo.destroy
+    redirect_to("/")
+  end
+
+=begin
 
   def show
     the_id = params.fetch("path_id")
@@ -25,18 +55,21 @@ class TodosController < ApplicationController
     render({ :template => "todos/show.html.erb" })
   end
 
+
+  
   def create
     the_todo = Todo.new
     the_todo.content = params.fetch("query_content")
-    the_todo.status = params.fetch("query_status")
-    the_todo.user_id = params.fetch("query_user_id")
-    the_todo.category_id = params.fetch("query_category_id")
+    #the_todo.status = params.fetch("query_status")
+    the_todo.user_id = session.fetch(:user_id)
+    #the_todo.user_id = params.fetch("query_user_id")
+    #the_todo.category_id = params.fetch("query_category_id")
 
     if the_todo.valid?
       the_todo.save
-      redirect_to("/todos", { :notice => "Todo created successfully." })
+      redirect_to("/student_todos", { :notice => "Todo created successfully." })
     else
-      redirect_to("/todos", { :alert => the_todo.errors.full_messages.to_sentence })
+      redirect_to("/student_todos", { :alert => the_todo.errors.full_messages.to_sentence })
     end
   end
 
@@ -65,4 +98,5 @@ class TodosController < ApplicationController
 
     redirect_to("/todos", { :notice => "Todo deleted successfully."} )
   end
+=end
 end

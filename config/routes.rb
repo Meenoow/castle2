@@ -55,9 +55,7 @@ Rails.application.routes.draw do
   post("/insert_todo", { :controller => "todos", :action => "create" })
           
   # READ
-  #get("/todos", { :controller => "todos", :action => "index" })
-  get("/teacher_todos", { :controller => "todos", :action => "index" })
-  get("/student_todos", { :controller => "todos", :action => "stu_index" })
+  get("/todos", { :controller => "todos", :action => "index" })
   
   get("/todos/:path_id", { :controller => "todos", :action => "show" })
   
