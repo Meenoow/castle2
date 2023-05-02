@@ -13,62 +13,51 @@
   <div>
     <h2>
       Add a new task
-    </h2>
+    </h2> 
 
-    
 
-<% categories = ['Math', 'Reading', 'Writing'] %>
-
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" label for="category_id_box">Subject</button>
-  <ul class="dropdown-menu">
-    <% categories.each do |category| %>
-      <li><a class="dropdown-item" href="#"><%= category %></a></li>
-    <% end %>
-  </ul>
-</div>
-
-<form action="/insert_todo" method="post">
       <div>
-        <label for="content_box">
-          Describe task
-        </label>
-        <input type="text" id="content_box" name="query_content">
-      </div>
-
-    <div>
-  <label for="status_box">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="status_dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        Status
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="status_dropdown">
-        <li><a class="dropdown-item" href="#">New</a></li>
-        <li><a class="dropdown-item" href="#">In Progress</a></li>
-        <li><a class="dropdown-item" href="#">Completed</a></li>
-      </ul>
-    </div>
-  </label>
-</div>
-
-        <input type="text" id="status_box" name="query_status">
+        <label for="category_id_box">Subject:</label> 
+        <select id="category_id_box" name="query_category">
+          <% options = ["Math", "Reading", "Writing"] %>
+          <% options.each do |option| %>
+            <option value="<%= option.downcase %>"><%= option %></option>
+          <% end %>
+        </select>
       </div>
 
       <div>
-        <label for="user_name_box">
-          Username
-        </label>
-
-        <input type="text" id="user_name_box" name="query_user_id">
+        <label for="status_box">Status:</label> 
+        <select id="status_box" name="query_status">
+          <% options = ["New", "In progress", "Completed"] %>
+          <% options.each do |option| %>
+            <option value="<%= option.downcase %>"><%= option %></option>
+          <% end %>
+        </select>
       </div>
 
       <div>
-        <label for="category_id_box">
-          Category
-        </label>
-
-        <input type="text" id="category_id_box" name="query_category_id">
+        <label for="user_name_box">Assign to:</label> 
+        <select id="user_name_box" name="query_user_id">
+          <% options = ["Whole class", "student 1", "student 2", "student 3"] %>
+          <% options.each do |option| %>
+            <option value="<%= option.downcase %>"><%= option %></option>
+          <% end %>
+        </select>
       </div>
+
+      <form action="/insert_todo" method="post">
+        <div>
+          <label for="content_box">Describe task</label>
+          <input type="text" id="content_box" name="query_content">
+        </div>
+      </form>
+
+      <!--<div>
+            <label for="category_id_box">Category</label>
+            <input type="text" id="category_id_box" name="query_category_id">
+          </div>
+        -->
 
       <button>
         Create todo

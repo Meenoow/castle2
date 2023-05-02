@@ -7,6 +7,14 @@ class TodosController < ApplicationController
     render({ :template => "teacher_todos/index.html.erb" })
   end
 
+  def stu_index
+    matching_todos = Todo.all
+
+    @list_of_todos = matching_todos.order({ :created_at => :desc })
+
+    render({ :template => "student_todos/stu_index.html.erb" })
+  end
+
   def show
     the_id = params.fetch("path_id")
 
