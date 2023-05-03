@@ -1,34 +1,38 @@
-<div class="col-6">
-  <h1>Welcome to Castle</h1>
-  <p>
-    Our goal is to enhance personalized learning, improve student engagement, and provide teachers 
-    with valuable insights to tailor their teaching strategies.
-  </p>
-  <div class="d-flex">
-    <div class="mr-2">
-      <form action="/user_sign_in">
-        <input type="hidden" name="role" value="teacher">
-        <button class="iden_button">I AM A TEACHER</button>
-      </form>
-    </div>
-    <div>
-      <form action="/user_sign_in">
-        <input type="hidden" name="role" value="student">
-        <button class="iden_button">I AM A STUDENT</button>
-      </form>
+<div class="row">
+  <div class="col-6">
+    <h1>Welcome to Castle</h1>
+    <p>
+      Our goal is to enhance personalized learning, improve student engagement, and provide teachers 
+      with valuable insights to tailor their teaching strategies.
+    </p>
+    <div class="d-flex">
+      <div class="me-2">
+        <form action="/user_sign_in">
+          <input type="hidden" name="role" value="teacher">
+          <button class="iden_button">I AM A TEACHER</button>
+        </form>
+      </div>
+      <div>
+        <form action="/user_sign_in">
+          <input type="hidden" name="role" value="student">
+          <button class="iden_button">I AM A STUDENT</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="gallery">
-  <%= image_tag "classroom1.jpg", alt:"class", class:"class_image" %>
-</div>
+  <div class="col-6">
+    <div class="gallery">
+      <%= image_tag "classroom1.jpg", alt:"class", class:"class_image" %>
+    </div>
 
-<div class="gallery_1">
-  <%= image_tag "classroom4.jpg", alt:"class", class:"class_image" %>
-</div>
+    <div class="gallery_1">
+      <%= image_tag "classroom4.jpg", alt:"class", class:"class_image" %>
+    </div>
 
 
-<div class="gallery_2">
-  <%= image_tag "classroom3.jpg", alt:"class", class:"class_image" %>
+    <div class="gallery_2">
+      <%= image_tag "classroom3.jpg", alt:"class", class:"class_image" %>
+    </div>
+  </div>
 </div>
