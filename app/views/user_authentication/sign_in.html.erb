@@ -1,71 +1,38 @@
-<div class="logo_banner">
-<%= image_tag "castle_logo.png", alt:"class", class:"logo" %><h1>Castle</h1>
+<div>
+  <%= image_tag "castle_logo.png", alt:"class", class:"logo" %><h1>Castle</h1>
 </div>
 
 <h2>Sign in to your account</h2>
-
-<!--<form action="/user_verify_credentials" method="post">
-  <input id="role_box" name="query_role" value="<%= @role || "student" %>" type="hidden">
-  <% if @role == "teacher" %>
-    <div>
-      <label for="email_box">Email</label>
-      <input id="email_box" name="query_email" placeholder="Enter your email..." type="text">
-    </div>
-  <% elsif @role == "student" %>
-    <div>
-      <label for="username_box">Username</label>
-      <input id="username_box" name="query_username" placeholder="Enter your username..." type="text">
-    </div>
-  <% end %>
-  <div>
-
-    <label for="password_box">Password</label>
-    <input id="password_box" name="query_password" placeholder="Enter your password..." type="password">
-  </div>
-
-  <button>
-    <a href="/todos">Sign in</a>
-  </button>
-</form>-->
 
 <hr>
 
 <div class="card">
   <div class="card-body">
-    <div class="form-floating mb-3" action="/user_verify_credentials" method="post">
-
+    <form class="form-floating mb-3" action="/user_verify_credentials" method="post">
       <input id="role_box" name="query_role" value="<%= @role || "student" %>" type="hidden">
-  <% if @role == "teacher" %>
-    <div>
-      <label for="email_box">Email</label>
-      <input id="email_box" name="query_email" placeholder="Enter your email..." type="text">
-    </div>
-  <% elsif @role == "student" %>
-    <div>
-      <label for="username_box"></label>
-      <input id="username_box" name="query_username" type="text" class="form-control" placeholder="ant">
-    </div>
-  <% end %>
-  <div>
 
-  <label for="password_box"></label>
-    <input id="password_box" name="query_password" class="form-control" placeholder="password" type="password">
+      <% if @role == "teacher" %>
+        <div class="form-floating mb-3">
+          <input id="email_box" name="query_email" placeholder="name@example.com" type="email" class="form-control">
+          <label for="email_box">Email</label>
+        </div>
+      <% elsif @role == "student" %>
+        <div class="form-floating mb-3">
+          <input id="username_box" name="query_username" type="password" class="form-control" placeholder="username">
+          <label for="username_box">Username</label>
+        </div>
+      <% end %>
 
-    </div>
-     <button class="sign_button">
-        <a href="/todos">Sign in</a>
-     </button>
-     <p>
-      Do not have an account?<a href="/user_sign_up"> Sign up </a> instead.
-    </p>
-  </div>
+      <div class="form-floating mb-3">
+        <input id="password_box" name="query_password" class="form-control" placeholder="password" type="password">
+        <label for="password_box">Password</label>
+      </div>
+     
+      <div class="mb-3">
+        <button class="btn btn-outline-secondary w-100">Sign in</button>
+      </div>
+
+
+     <p>Do not have an account? <a href="/user_sign_up">Sign up</a> instead.</p>
+  </form>
 </div>
-
-<!--<div class="form-floating mb-3">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>-->

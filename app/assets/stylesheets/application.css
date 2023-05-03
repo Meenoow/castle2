@@ -27,16 +27,15 @@ body {
   font-family: 'Comfortaa', cursive;
 }
 
+.bg-green {
+  background-color: #2E4F4F;
+}
+
 h1 {
   color: gainsboro;
 }
 
 h2 {
-  color: gainsboro;
-}
-
-p {
-  font-size: 20px;
   color: gainsboro;
 }
 
@@ -110,15 +109,4 @@ p {
 
 .card-body {
   
-}
-
-.sign_button {
-  background-color: #CBE4DE;
-  color: #CBE4DE;
-  border: solid 2px;
-  border-radius: 10px;
-  padding: 10px 20px 10px 20px;
-  float: left;
-  padding: 15px;
-  justify-content: space-around;
 }
