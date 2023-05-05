@@ -54,13 +54,13 @@ h3 {
 .iden_button {
   background-color: #5432D3;
   color: #DECEFE;
-  border: solid 2px;
+  border: solid 2px #5432D3;
   border-radius: 10px;
   padding: 10px 20px 10px 20px;
   float: left;
   padding: 15px;
   justify-content: space-around;
-  box-shadow: 5px 5px 10px rgb(107, 109, 109);
+  box-shadow: 6px 6px 10px rgb(107, 109, 109);
 }
 
 .class_image {
@@ -115,8 +115,13 @@ h3 {
 
 .card {
   position: absolute;
+
 }
 
 .card-body {
   
+}
+
+.bg-indigo {
+  background-color: $indigo-400;
 }
