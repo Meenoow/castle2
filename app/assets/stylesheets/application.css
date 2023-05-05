@@ -23,11 +23,10 @@
 }
 
 body {
-  /*background-color: #2E4F4F;*/
   background-image: url("background");
   font-family: 'Comfortaa', cursive;
   background-size: cover;
-  background-position: center;
+  
   background-repeat: no-repeat;
 }
 
@@ -46,6 +45,7 @@ h2 {
 h3 {
   color: #241E92;
 }
+
 
 .castle {
   border-radius: 200px;
@@ -125,3 +125,4 @@ h3 {
 .bg-indigo {
   background-color: $indigo-400;
 }
+
