@@ -1,11 +1,17 @@
 <div id="box1">
-  <div class="well-name" ><!--<h2 class="welcome"><%= @username %> name </h2>-->
-    <div class="render"><%= render "form" %></div>
-  </div>
+  <div class="well-name" ><h3 class="welcome"> Hi <%= @username %> name! <%= @today %></h3></div>
+  <div class="render"><%= render "form" %></div>
+
     <div id="box2">
-      <h5>Complete before the end of the day: <%= Date.today %></h5>
-      <!-- new code --->
+      <h5>Complete by the end of the day</h5>
           <ul>
+      <!-- check list => checking item off moves the item to Achievements --->
+           <li>
+    <label>
+      <input type="checkbox" name="item1" value="item1">
+      Item 1
+    </label>
+  </li>
         <% @list_of_todos.each do |todo| %>
           <% if todo.status == "next_up" %>
             <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago </li>
@@ -19,39 +25,60 @@
       </ul> 
          <ul>
             <% @list_of_todos.each do |todo| %>
-            <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
+            <li><%= todo.content %><!--<a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p>--></li>
           </ul>
+          <!-- no need for In Progress items --->
           <form action="/modify_todo/<%= todo.id %>" method="post">
               <input type="hidden" name="query_status" value="next_up">
               <button>In Progress</button>
             </form>
             <% end %>
-
-              <div class="done">-->
+<br>
     <!-- make the done items gray out, move to the bottom, or cross out -->
-    <h2>Achievements</h2>
+  <div class="done">
+    <h4>Achievements</h4>
       
       <ul>
         <% @list_of_todos.each do |todo| %>
           <% if todo.status == "done" %>
           <% time = Time.now %>
-            <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a> <p>Completed at <%= todo.updated_at.strftime("%l:%M%P on %d-%b-%Y") %> ago</p></li>
+            <li><%= todo.content %><!--<a href="/delete_todo/<%= todo.id %>">Delete</a>--> <p>Completed at <%= todo.updated_at.strftime("%l:%M%P on %d-%b-%Y") %></p></li>
           <% end %>
         <% end %>
       </ul>
     </div>
-
-
-      <!-- stops --->
        
     </div>
 
     <div id="box3">
-      <h1>hello</h1>
+      <h5>Daily resourcess</h5>
+      <div class="grid">
+        <a class="ress-logo" href="">
+          <%= image_tag "youtube", class:"resources" %>
+        </a>
+        <a class="ress-logo" href="">
+          <%= image_tag "prodigy", class:"resources" %>
+        </a>
+        <a class="ress-logo" href="">
+          <%= image_tag "search-logo", class:"resources" %>
+        </a>
+        <a class="ress-logo" href="">
+          <%= image_tag "google-chrome", class:"resources" %>
+        </a>
+
+      </div>
     </div>
 
-   <!--<div id="box4">
-      <h1>hello</h1>
-    </div>-->
+   <div id="box4">
+      <h5>Ask a question or check your work!</h5>
+      <div class="gif">
+      <%= image_tag "810950", class:"resources" %>
+      </div>
+      <div>
+        <form action="/insert_question" method="post">
+        <input for="question_box" type="text" id="question_box" name="" class="form-control" placeholder="Type here">
+        </form>
+      </div>
+   </div>
 
 </div>

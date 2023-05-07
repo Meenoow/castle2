@@ -7,6 +7,14 @@ class TodosController < ApplicationController
 
     @list_of_todos = matching_todos.order({ :created_at => :desc })
 
+    #url_username = params.fetch("query_username")
+
+    #matching_usernames = User.where({ :username => url_username })
+
+    #@the_user = matching_usernames.at(0)
+    date = Date.today
+    @today = date.to_formatted_s(:long)
+
     render({ :template => "todos/index.html.erb" })
   end
 

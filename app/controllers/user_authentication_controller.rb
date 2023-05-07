@@ -6,7 +6,7 @@ class UserAuthenticationController < ApplicationController
   end
 
   def sign_in_form
-    @role = params.fetch("role", "student")
+    #@role = params.fetch("role", "student")
     render({ :template => "user_authentication/sign_in.html.erb" })
   end
 
@@ -62,6 +62,9 @@ def create_cookie
   end
 
   def sign_up_form
+    matching_users = User.all
+
+    @list_of_users = matching_users.order({ :username => :asc })
     render({ :template => "user_authentication/sign_up.html.erb" })
   end
 
