@@ -1,98 +1,9 @@
-<div id="box1">
-  <div class="well-name" ><h1 class="welcome">Welcome</h1></div>
+<div id="box1"><div class="well-name" ><h2 class="welcome"><%= @username %> name </h2><%= render "form" %></div>
 
     <div id="box2">
-      <h1>red</h1>
-    </div>
-
-    <div id="box3">
-      <h1>hello</h1>
-    </div>
-
-    <div id="box4">
-      <h1>hello</h1>
-    </div>
-
-</div>
-  
-  
-  <!--<div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-lg-8 col-xl-1">
-        <div class="card rounded-5 text-white" style="background-color: #6610f2">
-          <div class="card-body p-5 ">
-
-            <p class="mb-2"><span class="h2 me-2">Team Meeting</span> 
-            <h4 class="text-muted pb-2">04/01/2020 • ML - 1321</h4>
-            <div class="rounded-3 bg-secondary mt-3">
-          
-            <ul class="list-group rounded-3 bg-secondary  mt-3">
-              <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                <s>Task list and assignments</s>
-              </li>
-              <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                Set due date and assignments
-              </li>
-              <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                Remove duplicate tasks and stories
-              </li>
-              <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                Update the userflow and stories
-              </li>
-              <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                Adjust the components
-              </li>
-            </ul> 
-            </div>
-
-            <div class="divider d-flex align-items-center my-4">
-              <p class="text-center mx-3 mb-0" style="color: #a2aab7;">Resources</p>
-            </div>
-
-            <ul class="list-group rounded-0 list-group-horizontal justify-content-center pb-2">
-              <li class="list-group-item border-0 d-flex align-items-center p-0">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"
-                  class="rounded-circle me-n2" width="45">
-              </li>
-              <li class="list-group-item border-0 d-flex align-items-center p-0">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp" alt="avatar"
-                  class="rounded-circle me-n2" width="45">
-              </li>
-              <li class="list-group-item border-0 d-flex align-items-center p-0">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar"
-                  class="rounded-circle me-n2" width="45">
-              </li>
-              <li class="list-group-item border-0 d-flex align-items-center p-0">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
-                  class="rounded-circle me-n2" width="45">
-              </li>
-            </ul>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-      </div>
-    </div>
-  </div>
-</div>-->
-
-
-
-<!--<div class="card border-primary mb-7" style="max-width: 30rem; ">
-    <h1><%= @username %> todo list</h1>
-
-    <div class="in_progress">
-
-      <h4>Complete your tasks before the end of the day</h4>
-      <ul>
+      <h5>Complete before the end of the day: <%= Date.today %></h5>
+      <!-- new code --->
+          <ul>
         <% @list_of_todos.each do |todo| %>
           <% if todo.status == "next_up" %>
             <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago </li>
@@ -103,32 +14,20 @@
             </form>
           <% end %>
         <% end %>
-      </ul>
-    </div>
-
-      <h2>
-        Add new goal
-      </h2>
-
-      <%= render "form" %>
-
-      <div class="next_up">
-      <h2><%=Time.now.strftime("%a %e, %R %p") %></h2>
-        <h2><%= Date.today %></h2>-->
-         <!-- <ul>
+      </ul> 
+         <ul>
             <% @list_of_todos.each do |todo| %>
             <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
           </ul>
           <form action="/modify_todo/<%= todo.id %>" method="post">
               <input type="hidden" name="query_status" value="next_up">
-              <button>Move to In Progress</button>
+              <button>In Progress</button>
             </form>
             <% end %>
-    </div>
 
-    <div class="done">-->
+              <div class="done">-->
     <!-- make the done items gray out, move to the bottom, or cross out -->
-     <!-- <h2>Achievements</h2>
+    <h2>Achievements</h2>
       
       <ul>
         <% @list_of_todos.each do |todo| %>
@@ -138,22 +37,19 @@
           <% end %>
         <% end %>
       </ul>
+    </div>
+
+
+      <!-- stops --->
+       
+    </div>
+
+    <div id="box3">
+      <h1>hello</h1>
+    </div>
+
+   <!--<div id="box4">
+      <h1>hello</h1>
     </div>-->
 
-    <!-- button and password box show up ONLY when all tasks are completed --> 
-
-   <!-- <form action="/unlock" method="post">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password">
-      <input type="submit" value="Unlock">
-      <% if session[:unlocked] %>
-        <button>Play!</button>
-      <% else %>
-        <p>password required</p>
-      <% end %>
-    </form>
-
 </div>
-
-  </div>
-</div>-->
