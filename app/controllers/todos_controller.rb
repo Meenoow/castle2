@@ -42,14 +42,14 @@ class TodosController < ApplicationController
     current_stat = params.fetch("query_status")
     @todo.status=current_stat
     @todo.save
-    redirect_to("/")
+    redirect_to("/todos")
   end
 
   def destroy
     the_id = params.fetch("path_id")
     the_todo = Todo.where({id: the_id}).at(0)
     the_todo.destroy
-    redirect_to("/")
+    redirect_to("/todos")
   end
 
 =begin
