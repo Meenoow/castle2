@@ -1,83 +1,94 @@
-<section class="vh-100 gradient-custom-2">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-12 col-xl-10">
-
-        <div class="card mask-custom">
-          <div class="card-body p-4 text-white">
-           <div class="well-name" ><h3 class="welcome"> Hi <%= @username %> name! <%= @today %></h3></div>
-           <div class="render"><%= render "form" %></div>
-          </div>
-        </div>
-
+<section class="gradient-custom-2">
+  <div class="container">
+    <div class="card mask-custom">
+      <div class="card-body p-4 text-white">
+        <div class="well-name" ><h3 class="welcome"> Hi <%= @current_user.username %>! Today is <%= @today %></h3></div>
+        <div class="render"><%= render "form" %></div>
       </div>
     </div>
   </div>
 </section> 
-<section class="vh-100 gradient-custom-2">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-12 col-xl-10">
 
-        <div class="card mask-custom">
-          <div class="card-body p-4 text-white">
+<section class="gradient-custom-2">
+  <div class="container">
+    <div class="card mask-custom">
+      <div class="card-body p-4 text-white">
+        <div class="text-center pt-3 pb-2">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+            alt="Check" width="60">
+          <h2 class="my-4">Task List</h2>
+        </div>
+        <div class="table-responsive">
+          <table class="table text-white mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Subject</th>
+                <th scope="col">Task</th>
+                <th scope="col">Update</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr class="fw-normal">
+              <th>
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                  alt="avatar 1" style="width: 45px; height: auto;">
+                <span class="ms-2">Math</span>
+              </th>
+              <td class="align-middle">
+                <span>Finish division test</span>
+              </td>
 
-            <div class="text-center pt-3 pb-2">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
-                alt="Check" width="60">
-              <h2 class="my-4">Task List</h2>
-            </div>
-            <table class="table text-white mb-0">
-              <thead>
-                <tr>
-                  <th scope="col">Subject</th>
-                  <th scope="col">Task</th>
-                  <th scope="col">Update</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="fw-normal">
-                  <th>
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                      alt="avatar 1" style="width: 45px; height: auto;">
-                    <span class="ms-2">Math</span>
-                  </th>
-                  <td class="align-middle">
-                    <span>Finish division test</span>
-                  </td>
-                  <td class="align-middle">
-                    <h6 class="mb-0"><span class="badge bg-danger">Incomplete</span></h6>
-                  </td>
-                  <td class="align-middle">
-                    <a href="#!" data-mdb-toggle="tooltip" title="Done"><i
-                        class="fas fa-check fa-lg text-success me-3"></i></a>
-                    <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
-                        class="fas fa-trash-alt fa-lg text-warning"></i></a>
-                  </td>
-                </tr>
+              <td class="align-middle">
                 <ul>
-        <% @list_of_todos.each do |todo| %>
-          <% if todo.status == "next_up" %>
-            <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago 
-            </li>
+                  <% @list_of_todos.each do |todo| %>
+                    <% if todo.status == "done" %>
+                      <% time = Time.now %>
+                      <h6 class="mb-0"><span class="badge bg-danger"><p>Completed at <%= todo.updated_at.strftime("%l:%M%P on %d-%b-%Y") %></p></span></h6>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </td>
 
-            <form action="/modify_todo/<%= todo.id %>" method="post">
-              <input type="hidden" name="query_status" value="done">
-              <button>Move to Done</button>
-            </form>
+              <td class="align-middle">
+                  <ul>
+                    <% @list_of_todos.each do |todo| %>
+                      <% if todo.status == "done" %>
+                        <a href="/delete_todo/<%= todo.id %>" data-mdb-toggle="tooltip" title="Done"><i class="fas fa-check fa-lg text-success me-3"></i></a>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                    
+                <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
+                    class="fas fa-trash-alt fa-lg text-warning"></i></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+            
+        <ul>
+          <% @list_of_todos.each do |todo| %>
+            <% if todo.status == "next_up" %>
+              <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago 
+              </li>
+
+              <form action="/modify_todo/<%= todo.id %>" method="post">
+                <input type="hidden" name="query_status" value="done">
+                <button>Move to Done</button>
+              </form>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul> 
+        </ul> 
 
       <ul>
         <% @list_of_todos.each do |todo| %>
         <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
       </ul>
-        <form action="/modify_todo/<%= todo.id %>" method="post">
-          <input type="hidden" name="query_status" value="next_up">
-          <button>In Progress</button>
-        </form>
+    
+      <form action="/modify_todo/<%= todo.id %>" method="post">
+        <input type="hidden" name="query_status" value="next_up">
+        <button>In Progress</button>
+      </form>
         <% end %>
 
     <!--done-->
