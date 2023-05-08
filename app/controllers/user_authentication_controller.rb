@@ -6,7 +6,7 @@ class UserAuthenticationController < ApplicationController
   end
 
   def sign_in_form
-    #@role = params.fetch("role", "student")
+    @role = params.fetch("role", "student")
     render({ :template => "user_authentication/sign_in.html.erb" })
   end
 
