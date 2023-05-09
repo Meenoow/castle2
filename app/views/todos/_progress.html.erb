@@ -1,0 +1,11 @@
+<div class="progress my-5">
+  <div
+    class="progress-bar progress-bar-striped progress-bar-animated"
+    role="progressbar"
+    aria-label="Animated striped example"
+    aria-valuenow="<%= @current_user.todos_completed_today.count %>"
+    aria-valuemin="0"
+    aria-valuemax="<%= @current_user.daily_todo_goal %>"
+    style="width: <%= (@current_user.todos_completed_today.count / @current_user.daily_todo_goal.to_f) * 100 %>%"
+  ></div>
+</div>
