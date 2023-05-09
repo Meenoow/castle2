@@ -1,5 +1,5 @@
-<div class="table-responsive">
-  <table class="table text-white mb-0">
+<div class="table-responsive-sm">
+  <table class="table table-sm text-white mb-0">
     <thead>
       <tr>
         <th scope="col">Subject</th>
@@ -25,18 +25,19 @@
         <td class="align-middle">
           <% if todo.status == "done" %>
             <span class="badge bg-info">
-              Completed <%= todo.updated_at.strftime("%l:%M%P on %D") %>
+              Completed: <%= todo.updated_at.strftime("%l:%M%P on %D") %>
+              <a href="/delete_todo/<%= todo.id %>" class="btn btn-outline-light" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem;">Delete</a>
             </span>
           <% else %>
             <span class="badge bg-warning">
-              In progress <%= todo.updated_at.strftime("%l:%M%P on %D") %>
+              In progress: <%= todo.updated_at.strftime("%l:%M%P on %D") %>
+          
+            <a href="/delete_todo/<%= todo.id %>" class="btn btn-outline-light" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem;">Delete</a>
             </span>
-
-            <a href="/delete_todo/<%= todo.id %>" class="btn btn-danger">Delete</a>
 
             <form action="/modify_todo/<%= todo.id %>" method="post">
               <input type="hidden" name="query_status" value="done">
-              <button class="btn btn-success">Move to Done</button>
+              <button class="btn  btn-success" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem;">✔️</button>
             </form>
           <% end %>
         </td>

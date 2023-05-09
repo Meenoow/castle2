@@ -3,6 +3,7 @@ class TodosController < ApplicationController
 
   def index
     require "date"
+    require "time"
     matching_todos = @current_user.todos
 
     @list_of_todos = matching_todos.order({ :created_at => :desc })
