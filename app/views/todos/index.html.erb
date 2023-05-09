@@ -30,16 +30,29 @@
             </thead>
             <tbody>
             <tr class="fw-normal">
-             <!-- SUBJECT This section needs to show the subject (category) that the task belongs to. Create a new row in the table *challenge* Add a changing icon -->
+             <!-- SUBJECT This section needs to show the subject (category) that the task belongs to. Create a new row in the table *challeng* Add a changing icon -->
               <th>
                 <img src=""
                   alt="" style="width: 45px; height: auto;">
                 <span class="ms-2">Math</span> 
               </th>
-              <!-- TASK This section needs to show the explanation of the new task -->
+              <!-- TASK This section needs to show the explanation of the new task AND create a new row on the table. 
+              (when you press "in progress" it moves the item up but does not create a new row)-->
+              <td class="align-middle">
+                 <ul>
+                   <% @list_of_todos.each do |todo| %>
+                     <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
+                     <form action="/modify_todo/<%= todo.id %>" method="post">
+                      <input type="hidden" name="query_status" value="next_up">
+                      <button>In Progress</button>
+                     </form>
+                   <% end %>
+                </ul>
+              </td>
+              <!-- UPDATE indicates when the task was compleated but it also needs to show if its in progress. *challlenge* Change colors depending on status? sure  -->
               <td class="align-middle">
                 <ul>
-                  <% @list_of_todos.each do |todo| %>
+                 <% @list_of_todos.each do |todo| %>
                     <% if todo.status == "next_up" %>
                       <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago 
                       </li>
@@ -49,11 +62,6 @@
                       </form>
                     <% end %>
                   <% end %>
-                </ul>
-              </td>
-              <!-- UPDATE indicates when the task was compleated but it also needs to show if its in progress. *challlenge* Change colors depending on status? sure  -->
-              <td class="align-middle">
-                <ul>
                   <% @list_of_todos.each do |todo| %>
                     <% if todo.status == "done" %>
                       <% time = Time.now %>
@@ -64,51 +72,35 @@
               </td>
                <!-- ACTION Completed (check mark) or delete (grabage can) currently only displays when completed but status does not show in progress. Currently checkmark deletes it and grabage can does nothing-->
               <td class="align-middle">
-                  <ul>
-                    <% @list_of_todos.each do |todo| %>
-                      <% if todo.status == "done" %>
-                        <a href="/delete_todo/<%= todo.id %>" data-mdb-toggle="tooltip" title="done"><i class="fas fa-check fa-lg text-success me-3"></i></a>
-                      <% end %>
+               <td class="align-middle">
+                <ul>
+                  <% @list_of_todos.each do |todo| %>
+                    <% if todo.status == "next_up" %>
+                      <li><% todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>
+                      </li>
+                      <form action="/modify_todo/<%= todo.id %>" method="post">
+                        <input type="hidden" name="query_status" value="done">
+                        <button>Move to Done</button>
+                      </form>
                     <% end %>
-                    <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt fa-lg text-warning"></i></a>
-                  </ul>    
+                  <% end %>
+                </ul>         
               </td>
             </tr>
           </table>
         </div>
-            
-      
-
-      <ul>
-        <% @list_of_todos.each do |todo| %>
-        <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
-      </ul>
-    
-      <form action="/modify_todo/<%= todo.id %>" method="post">
-        <input type="hidden" name="query_status" value="next_up">
-        <button>In Progress</button>
-      </form>
-        <% end %>
-
-    <!--done-->
-        
-        <ul>
-          <% @list_of_todos.each do |todo| %>
-            <% if todo.status == "done" %>
-            <% time = Time.now %>
-              <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a> <p>Completed at <%= todo.updated_at.strftime("%l:%M%P on %d-%b-%Y") %></p></li>
-            <% end %>
-          <% end %>
-        </ul>
-
-              </tbody>
-            </table>
-
-
+        </tbody>
+      </table>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </section>
+
+
+
+            
+      
+
+      
