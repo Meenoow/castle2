@@ -30,15 +30,28 @@
             </thead>
             <tbody>
             <tr class="fw-normal">
+             <!-- SUBJECT This section needs to show the subject (category) that the task belongs to. Create a new row in the table *challenge* Add a changing icon -->
               <th>
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                  alt="avatar 1" style="width: 45px; height: auto;">
-                <span class="ms-2">Math</span>
+                <img src=""
+                  alt="" style="width: 45px; height: auto;">
+                <span class="ms-2">Math</span> 
               </th>
+              <!-- TASK This section needs to show the explanation of the new task -->
               <td class="align-middle">
-                <span>Finish division test</span>
+                <ul>
+                  <% @list_of_todos.each do |todo| %>
+                    <% if todo.status == "next_up" %>
+                      <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago 
+                      </li>
+                      <form action="/modify_todo/<%= todo.id %>" method="post">
+                        <input type="hidden" name="query_status" value="done">
+                        <button>Move to Done</button>
+                      </form>
+                    <% end %>
+                  <% end %>
+                </ul>
               </td>
-
+              <!-- UPDATE indicates when the task was compleated but it also needs to show if its in progress. *challlenge* Change colors depending on status? sure  -->
               <td class="align-middle">
                 <ul>
                   <% @list_of_todos.each do |todo| %>
@@ -49,36 +62,22 @@
                   <% end %>
                 </ul>
               </td>
-
+               <!-- ACTION Completed (check mark) or delete (grabage can) currently only displays when completed but status does not show in progress. Currently checkmark deletes it and grabage can does nothing-->
               <td class="align-middle">
                   <ul>
                     <% @list_of_todos.each do |todo| %>
                       <% if todo.status == "done" %>
-                        <a href="/delete_todo/<%= todo.id %>" data-mdb-toggle="tooltip" title="Done"><i class="fas fa-check fa-lg text-success me-3"></i></a>
+                        <a href="/delete_todo/<%= todo.id %>" data-mdb-toggle="tooltip" title="done"><i class="fas fa-check fa-lg text-success me-3"></i></a>
                       <% end %>
                     <% end %>
-                  </ul>
-                    
-                <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
-                    class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                    <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                  </ul>    
               </td>
             </tr>
           </table>
         </div>
             
-        <ul>
-          <% @list_of_todos.each do |todo| %>
-            <% if todo.status == "next_up" %>
-              <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago 
-              </li>
-
-              <form action="/modify_todo/<%= todo.id %>" method="post">
-                <input type="hidden" name="query_status" value="done">
-                <button>Move to Done</button>
-              </form>
-            <% end %>
-          <% end %>
-        </ul> 
+      
 
       <ul>
         <% @list_of_todos.each do |todo| %>
