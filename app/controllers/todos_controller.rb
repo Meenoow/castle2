@@ -18,6 +18,7 @@ class TodosController < ApplicationController
     @the_todo.content = params.fetch("query_content")
     @the_todo.user_id = session.fetch(:user_id)
     @the_todo.category_id = params.fetch("category_id")
+    
 
     if @the_todo.save
       redirect_to("/todos", :notice => "We saved a todo 🎉")
