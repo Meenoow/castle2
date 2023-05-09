@@ -5,18 +5,14 @@
         <th scope="col">Subject</th>
         <th scope="col">Task</th>
         <th scope="col">Update</th>
-        <th scope="col">Achievements</th>
       </tr>
     </thead>
     <tbody>
     <% @list_of_todos.each do |todo| %>
       <tr class="fw-normal">
-        <!-- SUBJECT This section needs to show the subject (category) that the task belongs to. Create a new row in the table *challeng* Add a changing icon -->
         <td>
           <span class="ms-2"><%= todo.category.description %></span> 
         </td>
-        <!-- TASK This section needs to show the explanation of the new task AND create a new row on the table. 
-        (when you press "in progress" it moves the item up but does not create a new row)-->
         <td class="align-middle">
           <%= todo.content %><!--<a href="/delete_todo/<%= todo.id %>">Delete</a>--><p><%= time_ago_in_words(todo.created_at) %> ago</p>
           <% if todo.status == "up_next" %>
@@ -26,8 +22,6 @@
             </form>
           <% end %>
         </td>
-        <!-- UPDATE indicates when the task was compleated but it also needs to show if its in progress.
-          *challlenge* Change colors depending on status? sure  -->
         <td class="align-middle">
           <% if todo.status == "done" %>
             <span class="badge bg-info">
@@ -45,10 +39,6 @@
               <button class="btn btn-success">Move to Done</button>
             </form>
           <% end %>
-        </td>
-          <!-- UPDATE COMPLETED (check mark) or delete (grabage can) currently only displays when completed but status does not show in progress. Currently checkmark deletes it and grabage can does nothing-->
-        <td class="align-middle">
-
         </td>
       </tr>
     <% end %>
