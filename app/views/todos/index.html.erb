@@ -25,7 +25,7 @@
                 <th scope="col">Subject</th>
                 <th scope="col">Task</th>
                 <th scope="col">Update</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Achievements</th>
               </tr>
             </thead>
             <tbody>
@@ -41,18 +41,19 @@
               <td class="align-middle">
                  <ul>
                    <% @list_of_todos.each do |todo| %>
-                     <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
+                     <li><%= todo.content %><!--<a href="/delete_todo/<%= todo.id %>">Delete</a>--><p><%= time_ago_in_words(todo.created_at) %> ago</p></li>
                      <form action="/modify_todo/<%= todo.id %>" method="post">
                       <input type="hidden" name="query_status" value="next_up">
-                      <button>In Progress</button>
+                      <button type="button" class="btn btn-outline-light btn-sm">start</button>
                      </form>
                    <% end %>
                 </ul>
               </td>
-              <!-- UPDATE indicates when the task was compleated but it also needs to show if its in progress. *challlenge* Change colors depending on status? sure  -->
+              <!-- UPDATE indicates when the task was compleated but it also needs to show if its in progress.
+               *challlenge* Change colors depending on status? sure  -->
               <td class="align-middle">
                 <ul>
-                 <% @list_of_todos.each do |todo| %>
+                <!-- <% @list_of_todos.each do |todo| %>
                     <% if todo.status == "next_up" %>
                       <li><%= todo.content %><a href="/delete_todo/<%= todo.id %>">Delete</a>Started <%= time_ago_in_words(todo.updated_at).gsub(/about /, '') %> ago 
                       </li>
@@ -61,16 +62,27 @@
                         <button>Move to Done</button>
                       </form>
                     <% end %>
-                  <% end %>
+                  <% end %> -->
+                  
                   <% @list_of_todos.each do |todo| %>
                     <% if todo.status == "done" %>
                       <% time = Time.now %>
-                      <h6 class="mb-0"><span class="badge bg-danger"><p>Completed at <%= todo.updated_at.strftime("%l:%M%P on %d-%b-%Y") %></p></span></h6>
+                      <h6 class="mb-0"><span class="badge bg-info"><p>Completed <%= todo.updated_at.strftime("%l:%M%P on %D") %></p></span></h6>
+                      <% else todo.status =! "done" %>
+                      <% time = Time.now %>
+                      <h6 class="mb-0"><span class="badge bg-warning"><p>In progress <%= todo.updated_at.strftime("%l:%M%P on %D") %></p></span></h6>
+                      <form action="/modify_todo/<%= todo.id %>" method="post">
+                      <input type="hidden" name="query_status" value="next_up">
+                      <a href="/delete_todo/<%= todo.id %>">Delete</a>
+                      <form action="/modify_todo/<%= todo.id %>" method="post">
+                        <input type="hidden" name="query_status" value="done">
+                        <button>Move to Done</button>
+                      </form>
                     <% end %>
                   <% end %>
                 </ul>
               </td>
-               <!-- ACTION Completed (check mark) or delete (grabage can) currently only displays when completed but status does not show in progress. Currently checkmark deletes it and grabage can does nothing-->
+               <!-- UPDATE COMPLETED (check mark) or delete (grabage can) currently only displays when completed but status does not show in progress. Currently checkmark deletes it and grabage can does nothing-->
               <td class="align-middle">
                <td class="align-middle">
                 <ul>
