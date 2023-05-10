@@ -25,7 +25,7 @@
         </td>
         <td class="align-middle">
           <% if todo.status == "done" %>
-            <span class="badge bg-info">
+            <span class="badge" style="background-color: #508BFC;">
               Completed: <%= todo.updated_at.strftime("%l:%M%P on %D") %>
               <a href="/delete_todo/<%= todo.id %>" class="btn btn-outline-light" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem;">Delete</a>
             </span>

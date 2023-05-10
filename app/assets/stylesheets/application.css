@@ -168,7 +168,7 @@ h3 {
 .card-circle {
     text-align:center;
      margin-top:30px;
-     margin-bottom: 30px;
+     margin-bottom: 75px;
      background: linear-gradient(-225deg, #B7F8DB 0%, #50A7C2 100%);    
      border:10px solid transparent;
      color:#fff;
@@ -181,7 +181,7 @@ h3 {
     font-weight:400;
 }
  .card-circle .card-icon i {
-     font-size: 60px;
+     font-size: 40px;
      display: block;
 }
  .card-circle:nth-child(2) {
@@ -219,13 +219,13 @@ h3 {
          z-index:0;
     }
      .card-circle {
-         width:200px; /* changes the size of card - the inside content */
-         height:200px;
+         width:100px; /* changes the size of card minus the inside content */
+         height:100px;
     }
      .card-circle:nth-child(2) {
          margin-left:-20px;
          box-shadow: 1px 2px 20px 8px rgba(241, 235, 235, 0.12);
-         transform: scale(1.2);
+         transform: scale(1.0);
          z-index:1;
     }
    .card-circle .card-icon i {
@@ -234,8 +234,8 @@ h3 {
 }
 @media only screen and (min-width: 991px) and (max-width: 1200px) {
    .card-circle {
-         width:140px;
-         height:140px;
+         width:40px; 
+         height:40px; 
     }
   .card-circle .card-icon i {
       margin-top: 0px;
@@ -249,4 +249,7 @@ h3 {
          z-index:1;
     }
 }
-
+ .card-chat {
+   padding-top: 10px;
+   margin-top: 10px;
+ }
