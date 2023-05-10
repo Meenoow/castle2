@@ -26,7 +26,6 @@ body {
   background: linear-gradient(90deg, rgb(125, 64, 246) 0%, rgb(80, 139, 252) 100%);
   font-family: 'Comfortaa', cursive;
   background-size: cover;
-  
   background-repeat: no-repeat;
 }
 
@@ -167,36 +166,38 @@ h3 {
 
 .card-circle{
     text-align:center;
-     margin-top:50px;
+     margin-top:40px;
      background: linear-gradient(-225deg, #B7F8DB 0%, #50A7C2 100%);    
      border:10px solid transparent;
      color:#fff;
      padding:50px;
      border-radius:50%;
+     background-clip: padding-box; /* Clip background to padding-box */
 }
+
  .card-circle .card-text{
     font-weight:400;
 }
  .card-circle .card-icon i{
-     font-size:60px;
-     display:block;
+     font-size: 60px;
+     display: block;
 }
  .card-circle:nth-child(2){
-    background:#142850;
+    background: #274783;
 }
  .card-circle .btn {
-    background:transparent;
-     border:1px solid #fff;
-     text-transform:uppercase;
-     padding:5px 30px;    
-     border-radius:0px;
-     Font-weight:600;
+  background: transparent;
+  border:1px solid #fff;
+  text-transform: uppercase;
+  padding: 5px 10px;    
+  border-radius:15px;
+  Font-weight: 200;
 }
 .card-circle .btn,.card-circle .card-icon i,.card-circle{
    transition: all ease-in-out 0.2s;
 }
  .card-circle:hover .btn{
-    background:#00A8CC;
+    background:#ce68ae;
      color:#fff;
    border: 1px solid transparent;
 }
@@ -204,10 +205,10 @@ h3 {
     transform: scale(1.1);
 }
  .card-circle:hover{
-    border:10px solid #00A8CC;
+    border:10px solid#ce68ae;
 }
  .card-circle:hover i {
-   text-shadow: 0px -1px 10px #00A8CC;
+   text-shadow: 0px -1px 10px #ce68ae;
     transform:scale(1.2)rotate(20deg);
 }
  @media only screen and (min-width: 1200px) {
@@ -216,8 +217,8 @@ h3 {
          z-index:0;
     }
      .card-circle{
-         width:400px;
-         height:400px;
+         width:200px; /* changes the size of card - the inside content */
+         height:200px;
     }
      .card-circle:nth-child(2){
          margin-left:-20px;
@@ -226,19 +227,16 @@ h3 {
          z-index:1;
     }
    .card-circle .card-icon i{
-      margin-top: 20px;
+      margin-top: 5px;
      }
 }
 @media only screen and (min-width: 991px) and (max-width: 1200px) {
    .card-circle{
-         width:340px;
-         height:340px;
+         width:140px;
+         height:140px;
     }
   .card-circle .card-icon i{
-     font-size:50px;
-   }
-  .card-circle .card-icon i{
-      margin-top: -25px;
+      margin-top: 0px;
      }
    .card-circle:nth-child(3){
          margin-left:-50px;
