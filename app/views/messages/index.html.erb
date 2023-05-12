@@ -3,7 +3,7 @@
   <div class="messages">
     <% Message.all.each do |message| %>
      <dt>user</dt>
-  <dd>
+   <dd>
     <form action="/insert_message" method="post">
       <input type="hidden" name="question" value="<%= question.id %>">
 
