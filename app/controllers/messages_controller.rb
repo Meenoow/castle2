@@ -1,5 +1,39 @@
 class MessagesController < ApplicationController
   def create
+    # create a new message 
+    user_message = Message.new
+    user_message.role = "@current_user.username"
+    user_message.content = params[:message]
+
+    # save the message to the database
+    user_message.save
+
+    # use the OpenAI API to generate a response to the user's input
+    response = OpenAI::GPT.new(
+      access_token: ENV.fetch("OPENAI_TOKEN"),
+      model: "text-davinci-002",
+      prompt: user_message.content,
+      max_tokens: 150,
+      temperature: 0.5
+    ).complete
+
+    # create a new message with the AI's response
+    ai_message = Message.new
+    ai_message.role = "work-bud"
+    ai_message.content = response.choices.first.text
+
+    # save the message to the database
+    ai_message.save
+
+    # redirect to the chat page
+    render({ :template => "messages/index.html.erb" })
+    #redirect_to("/messages/index")
+  end
+end
+
+##old code
+=begin class MessagesController < ApplicationController
+  def create
     the_message = Message.new
     the_message.role = params.fetch("query_role")
     the_message.content = params.fetch("query_content")
@@ -70,3 +104,4 @@ class MessagesController < ApplicationController
     redirect_to("/todo/index")
   end
 end
+=end
