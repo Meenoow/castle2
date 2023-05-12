@@ -1,33 +1,41 @@
 class MessagesController < ApplicationController
+  before_action(:force_user_sign_in)
+
+  def index
+    @messages = @current_user.messages
+
+    render({ :template => "messages/index.html.erb" })
+  end
+
   def create
-    # create a new message 
-    user_message = Message.new
-    user_message.role = "@current_user.username"
+    # create a new message
+    user_message = @current_user.messages.new
+    user_message.role = "user"
     user_message.content = params[:message]
+    # TODO: association with @current_user
 
     # save the message to the database
     user_message.save
 
     # use the OpenAI API to generate a response to the user's input
-    response = OpenAI::GPT.new(
-      access_token: ENV.fetch("OPENAI_TOKEN"),
-      model: "text-davinci-002",
-      prompt: user_message.content,
-      max_tokens: 150,
-      temperature: 0.5
-    ).complete
+    # response = OpenAI::GPT.new(
+    #   access_token: ENV.fetch("OPENAI_TOKEN"),
+    #   model: "text-davinci-002",
+    #   prompt: user_message.content,
+    #   max_tokens: 150,
+    #   temperature: 0.5
+    # ).complete
 
-    # create a new message with the AI's response
-    ai_message = Message.new
-    ai_message.role = "work-bud"
-    ai_message.content = response.choices.first.text
+    # # create a new message with the AI's response
+    # ai_message = Message.new
+    # ai_message.role = "work-bud"
+    # ai_message.content = response.choices.first.text
 
     # save the message to the database
-    ai_message.save
+    # ai_message.save
 
     # redirect to the chat page
-    render({ :template => "messages/index.html.erb" })
-    #redirect_to("/messages/index")
+    redirect_to("/messages")
   end
 end
 

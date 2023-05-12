@@ -1,27 +1,16 @@
 <h1>Chat</h1>
 <div class="chat">
   <div class="messages">
-    <% Message.all.each do |message| %>
-     <dt>user</dt>
-   <dd>
-    <form action="/insert_message" method="post">
-      <input type="hidden" name="question" value="<%= question.id %>">
-
-      <input type="hidden" id="role_box" name="query_role" value="user">
-
-      <div>
-        <label for="content_box" style="display: none">
-          Content
-        </label>
-
-        <textarea id="content_box" name="query_content" placeholder="Enter your question..." cols="20" rows="10"></textarea>
-      </div>
-      <div class="message">
-        <span class="user"><%= message.role %>:</span> <%= message.content %>
-      </div>
+    <% @messages.each do |message| %>
+      <dt>user</dt>
+      <dd>
+        <div class="message">
+          <span class="user"><%= message.role %>:</span> <%= message.content %>
+        </div>
+      </dd>
     <% end %>
   </div>
-  <form action="/messages" method="post">
+  <form action="/insert_message" method="post">
     <label for="message">Message:</label>
     <input type="text" id="message" name="message" placeholder="How can I help you?" />
     <button type="submit">Send</button>
