@@ -262,3 +262,10 @@ h3 {
   width: 350px;
   height: 350px;
 }
+
+.coin {
+  width: 55px;
+  height: 55px;
+  margin-top: 12px;
+}
+

@@ -1,3 +1,4 @@
+<div style="display:flex;">
 <div class="progress my-5" style="width: 40rem;">
   <div
     class="progress-bar progress-bar-striped bg-info progress-bar-animated"
@@ -9,4 +10,8 @@
     style="width: <%= (@current_user.todos_completed_today.count / @current_user.daily_todo_goal.to_f) * 100 %>%"
   >
   </div>
+</div>
+  <div class="coin" style="">
+   <%= image_tag "giphy-2.gif", alt:"coin", class:"coin"%>
+  </div> 
 </div>

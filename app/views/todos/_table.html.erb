@@ -14,7 +14,7 @@
         <td>
           <span class="ms-2"><%= todo.category.description %></span> 
         </td>
-        <td class="align-middle">
+        <td class="align-middle" style="display:flex;">
           <%= todo.content %><!--<a href="/delete_todo/<%= todo.id %>">Delete</a>--><p><%= time_ago_in_words(todo.created_at) %> ago</p>
           <% if todo.status == "up_next" %>
             <form action="/modify_todo/<%= todo.id %>" method="post">

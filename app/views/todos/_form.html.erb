@@ -1,6 +1,7 @@
 <!-- this form adds the task to the table but does not include the subject (category)-->
+
 <form action="/insert_todo" method="post">
-  <div>
+  <div class="form" style="display:flex;">
     <label for="category_id_box">Subject:</label> 
     <select id="category_id_box" name="category_id">
       <% Category.all.each do |option| %>
@@ -12,10 +13,10 @@
       </label>
 
      <input type="text" id="content_box" name="query_content">
-  </div>
     <button class="add">
       Add to list
     </button>
+  </div>
 </form>
 
   
