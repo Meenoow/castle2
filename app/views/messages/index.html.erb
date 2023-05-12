@@ -4,6 +4,35 @@
     <div class="message">
       <span class="user"><%= @current_user.username %>:</span> Let's chat!
     </div>
+    <!-- Student will write a question and the AI will respond. The response does not need to be displayed anywhere but the box-->
+    <dl>
+  <% Message do |message| %>
+    <dt><%= message.role %></dt>
+    <dd><%= simple_format(message.content) %></dd>
+  <% end %>
+
+  <dt>user</dt>
+  <dd>
+    <form action="/insert_message" method="post">
+      <input type="hidden" name="question" value="<%= question.id %>">
+
+      <input type="hidden" id="role_box" name="query_role" value="user">
+
+      <div>
+        <label for="content_box" style="display: none">
+          Content
+        </label>
+
+        <textarea id="content_box" name="query_content" placeholder="Enter your question..." cols="20" rows="10"></textarea>
+      </div>
+
+      <button>
+        Add message
+      </button>
+    </form>
+  </dd>
+</dl>
+
   </div>
   <form>
     <label for="message">Message:</label>

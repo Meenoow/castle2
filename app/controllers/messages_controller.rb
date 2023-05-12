@@ -1,58 +1,72 @@
 class MessagesController < ApplicationController
-  def index
-    matching_messages = Message.all
-
-    @list_of_messages = matching_messages.order({ :created_at => :desc })
-
-    render({ :template => "messages/index.html.erb" })
-  end
-
-  def show
-    the_id = params.fetch("path_id")
-
-    matching_messages = Message.where({ :id => the_id })
-
-    @the_message = matching_messages.at(0)
-
-    render({ :template => "messages/show.html.erb" })
-  end
-
   def create
     the_message = Message.new
-    the_message.content = params.fetch("query_content")
     the_message.role = params.fetch("query_role")
-    the_message.user_id = params.fetch("query_user_id")
+    the_message.content = params.fetch("query_content")
+
+    system_message = Message.new
+    system_message.role = "system"
+    system_message.content = "You are an experience teacher. Ask the user five questions to assess their #{message.topic} proficiency. Start with an easy question. After each answer, increase or decrease the difficulty of the next question based on how well the user answered.
+    In the end, provide a score between 0 and 10."
+    system_message.save
 
     if the_message.valid?
       the_message.save
-      redirect_to("/messages", { :notice => "Message created successfully." })
-    else
-      redirect_to("/messages", { :alert => the_message.errors.full_messages.to_sentence })
+
+      client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
+
+      api_messages_array = Array.new
+
+        api_messages_array.push(message_hash)
+      end
+
+      response = client.chat(
+        parameters: {
+          model: ENV.fetch("OPENAI_TOKEN"),
+          messages: api_messages_array,
+          temperature: 1.0,
+        },
+      )
+## the student writes the message ##
+      user_message = Message.new
+      user_message.role = "@current_user.username"
+      user_message.content = "Please answer #{message.content}"
+      user_message.save
+## the assistant responds to the message ##
+      assistant_message = Message.new
+      assistant_message.role = "assistant"
+      assistant_message.content = response.fetch("choices").at(0).fetch("message").fetch("content")
+      assistant_message.save
+
+## new message code create ##
+
+    client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
+
+    api_messages_array = Array.new
+
+    ## if not quiz then question table? ##
+
+    quiz_messages = Message.where({ :quiz_id => the_quiz.id }).order(:created_at)
+
+    quiz_messages.each do |the_message|
+      message_hash = { :role => the_message.role, :content => the_message.content }
+
+      api_messages_array.push(message_hash)
     end
-  end
 
-  def update
-    the_id = params.fetch("path_id")
-    the_message = Message.where({ :id => the_id }).at(0)
+    response = client.chat(
+      parameters: {
+          model: ENV.fetch("OPENAI_TOKEN"),
+          messages: api_messages_array,
+          temperature: 1.0,
+      }
+    )
 
-    the_message.content = params.fetch("query_content")
-    the_message.role = params.fetch("query_role")
-    the_message.user_id = params.fetch("query_user_id")
+    assistant_message = Message.new
+    assistant_message.role = "Work-Bud"
+    assistant_message.content = response.fetch("choices").at(0).fetch("message").fetch("content")
+    assistant_message.save
 
-    if the_message.valid?
-      the_message.save
-      redirect_to("/messages/#{the_message.id}", { :notice => "Message updated successfully."} )
-    else
-      redirect_to("/messages/#{the_message.id}", { :alert => the_message.errors.full_messages.to_sentence })
-    end
-  end
-
-  def destroy
-    the_id = params.fetch("path_id")
-    the_message = Message.where({ :id => the_id }).at(0)
-
-    the_message.destroy
-
-    redirect_to("/messages", { :notice => "Message deleted successfully."} )
+    redirect_to("/todo/index")
   end
 end
