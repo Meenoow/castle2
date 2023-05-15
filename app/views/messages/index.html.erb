@@ -2,7 +2,7 @@
 <div class="chat">
   <div class="messages">
     <% @messages.each do |message| %>
-      <dt>user</dt>
+      <dt><%= message.role %></dt>
       <dd>
         <div class="message">
           <span class="user"><%= message.role %>:</span> <%= message.content %>

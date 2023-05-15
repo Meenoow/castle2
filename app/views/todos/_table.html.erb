@@ -14,7 +14,7 @@
         <td>
           <span class="ms-2"><%= todo.category.description %></span> 
         </td>
-        <td class="align-middle" style="display:flex;">
+        <td class="align-middle">
           <%= todo.content %><!--<a href="/delete_todo/<%= todo.id %>">Delete</a>--><p><%= time_ago_in_words(todo.created_at) %> ago</p>
           <% if todo.status == "up_next" %>
             <form action="/modify_todo/<%= todo.id %>" method="post">
@@ -30,6 +30,7 @@
               <a href="/delete_todo/<%= todo.id %>" class="btn btn-outline-light" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem;">Delete</a>
             </span>
           <% else %>
+            <div class="in-progrerss" style="display:flex;">            
             <span class="badge" style="background-color: #ce68ae;">
               In progress: <%= todo.updated_at.strftime("%l:%M%P on %D") %>
           
@@ -42,9 +43,12 @@
                 <button class="btn" style="--bs-btn-padding-y: .15rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; background-color: #9CE2D3;">✔️</button>
               </div>
             </form>
+            </div>
           <% end %>
         </td>
       </tr>
     <% end %>
   </table>
+  <br>
+  <br>
 </div>
