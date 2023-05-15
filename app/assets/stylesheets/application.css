@@ -269,3 +269,12 @@ h3 {
   margin-top: 12px;
 }
 
+.chat-messages {
+  height: 150px;
+  overflow-y: scroll;
+}
+
+.btn {
+  margin-left: 7px;
+  margin-top: 3px;
+}

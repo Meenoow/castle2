@@ -1,17 +1,17 @@
-<div class="chat">
-  <div class="messages">
-    <% @current_user.messages.each do |message| %>
-      <dt><%= message.role %></dt>
-      <dd>
-        <div class="message">
-          <span class="user"><%= message.role %>:</span> <%= message.content %>
-        </div>
-      </dd>
-    <% end %>
-  </div>
-  <form action="/insert_message" method="post">
-    <label for="message">Message:</label>
-    <input type="text" id="message" name="message" placeholder="How can I help you?" />
-    <button type="submit">Send</button>
-  </form>
+<div class="chat-messages">
+  <% @current_user.messages.each do |message| %>
+    <dt><%= message.role %></dt>
+    <dd>
+      <div class="message">
+        <span class="user"><%= message.role %>:</span> <%= message.content %>
+      </div>
+    </dd>
+  <% end %>
 </div>
+<form action="/insert_message" method="post">
+  <div class="mb-3">
+    <label for="message"></label>
+    <input type="text" id="message" name="message" placeholder="How can I help you?" />
+    <button class="btn btn-sm btn-outline text-white" style="background-color: #ce68ae;" type="submit">Ask</button>
+  </div>
+</form>

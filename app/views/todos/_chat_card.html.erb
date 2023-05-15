@@ -1,16 +1,13 @@
-<div class="mask-custom " style="width: 25rem;">
+<div class="mask-custom" style="width: 25rem;" >
   <div class="card-chat gap-3 card-body p-4 text-white">
-    <div class="chat" >
       <%= image_tag "bat.gif", alt:"bat", class:"bat"%>
-
-        <form action="">
-          <div class="card mb-3" style="max-width: 23rem; overflow-y:auto; background-color: #9CE2D3;" >
-             <div class="card-header">Lets chat!</div>
-             <div class="card-body">
-              <%= render "messages/messages" %>
-              </div>
-          </div>
-        </form> 
-    </div>
+      <form action="">
+        <div class="card mb-2" style="max-width: 23rem; background-color: #284783;" >
+            <div class="card-header">Lets chat!</div>
+            <div class="card-body">
+            <%= render "messages/messages" %>
+            </div>
+        </div>
+      </form> 
   </div>
 </div>
