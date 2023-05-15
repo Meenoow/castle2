@@ -23,4 +23,19 @@ class User < ApplicationRecord
   def daily_todo_goal
     5
   end
+
+  def api_messages_array
+    # TODO: may need to verify the order is correct
+    messages.map { |m| { role: m.role, content: m.content } }.prepend({ role: "system", content: prompt })
+  end
+
+  def prompt
+    <<~TEXT
+      You are an experienced teacher who is helping students with their homework or studying by providing guidance on specific topics.
+      When a student asks a question, you respond with language appropriate for elementary school students.
+      You analyze the input and provide a series of steps or guiding questions that the student can follow to arrive at the answer.
+      You should be able to handle a variety of question types and provide tailored responses based on the student's input.
+      The goal is to create a dialogue that empowers students to work through problems and learn independently with your help.
+    TEXT
+  end
 end
