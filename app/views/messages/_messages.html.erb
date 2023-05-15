@@ -1,7 +1,6 @@
-<h1>Chat</h1>
 <div class="chat">
   <div class="messages">
-    <% @messages.each do |message| %>
+    <% @current_user.messages.each do |message| %>
       <dt><%= message.role %></dt>
       <dd>
         <div class="message">

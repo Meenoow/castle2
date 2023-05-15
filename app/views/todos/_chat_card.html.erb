@@ -1,19 +1,16 @@
 <div class="mask-custom " style="width: 25rem;">
-         <div class="card-chat gap-3 card-body p-4 text-white">
-            <div class="chat" >
-             <!--<iframe src="https://giphy.com/embed/4HvglAWtvzQGaEyLj9" width="380" height="380" frameBorder="0" class="giphy-embed" allowFullScreen>
-               </iframe>
-               
-               <a href="https://giphy.com/stickers/halloween-spooky-bat-4HvglAWtvzQGaEyLj9"></a>-->
+  <div class="card-chat gap-3 card-body p-4 text-white">
+    <div class="chat" >
+      <%= image_tag "bat.gif", alt:"bat", class:"bat"%>
 
-               <%= image_tag "bat.gif", alt:"bat", class:"bat"%>
-
-               <form action="">
-                 <div class="mb-3 ask-form">
-                     <label for="exampleFormControlTextarea1" class="form-label">How can I help you friend?</label>
-                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                 </div>
-               </form> 
-            </div>
-         </div>
+        <form action="">
+          <div class="card mb-3" style="max-width: 23rem; overflow-y:auto; background-color: #9CE2D3;" >
+             <div class="card-header">Lets chat!</div>
+             <div class="card-body">
+              <%= render "messages/messages" %>
+              </div>
+          </div>
+        </form> 
+    </div>
+  </div>
 </div>
